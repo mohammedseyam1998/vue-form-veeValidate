@@ -20,34 +20,37 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" style="padding-top: 10px;" role="tabpanel" aria-labelledby="home-tab">
-      <ValidationObserver ref="form">
-            <form @submit.prevent="onSubmit">
-      <div class="row-form mb-2" >
+     <ValidationObserver ref="form">
+       <form @submit.prevent="onSubmit">
+        <div class="row-form mb-2" v-for="(name, i) in newRow" :key="i" >
             <div class="row">
               <div class="col-2 mb-3">
                 <label>Name </label>
               </div>
               <div class="col-4">
                <validation-provider rules="required" v-slot="{ errors }">
-                  <input v-model="value" class="form-control" name="myinput" type="text" />
+                  <input v-model="username" class="form-control" name="myinput" type="text" />
                   <span class="alert-danger" style="color:red">{{ errors[0] }}</span>
                </validation-provider>
               </div>
               <div class="col-2">
-                <select class="browser-default custom-select">
-                  <option selected disabled>English</option>
-                  <option value="en" selected>English</option>
-                  <option value="ar">Arabic</option>
-                </select>
+               <ValidationProvider rules="required" v-slot="{ errors }">
+                        <select name="language" v-model="Lang" class="browser-default custom-select">
+                          <option selected disabled>English</option>
+                          <option value="en">Arabic</option>
+                          <option value="ar">spanish</option>
+                        </select>
+                        <span class="alert-danger" style="color:red" >{{ errors[0] }}</span>
+                      </ValidationProvider>
               </div>
               <div class="col-1">
-                <span class="icon-span mohm"  >
+                <span class="icon-span mohm" @click="deleteRow(i, name)" >
                   <i class="fas fa-minus" style="color: rgb(233, 6, 6);"></i>
                 </span>
               </div>
             </div>
           </div>
-          <span class="icon-span moh mb-3" >
+          <span class="icon-span moh mb-3" @click="addNewRow" >
             <i class="fas fa-plus" style="color: rgb(87, 216, 87)"></i>
           </span>
           <div class="row">
@@ -55,10 +58,14 @@
                 <label>Group type </label>
               </div>
               <div class="col-7">
-              <select class="custom-select" required>
-                <option selected disabled value="">Choose...</option>
-                <option>123</option>
-              </select>
+              <ValidationProvider rules="required" v-slot="{ errors }">
+                        <select name="group-type" v-model="groupType" class="browser-default custom-select" >
+                          <option selected disabled>Group Type</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                        </select>
+                        <span class="alert-danger" style="color:red">{{ errors[0] }}</span>
+                      </ValidationProvider>
              </div>
           </div>
           <div class="row">
@@ -66,7 +73,16 @@
                 <label>Code </label>
               </div>
               <div class="col-7">
-              <input type="text" class="form-control" required>
+              <validation-provider rules="required" v-slot="{ errors }">
+                        <input
+                          class="form-control"
+                          v-model="code"
+                          name="code"
+                          type="text"
+                          placeholder="Please enter the code"
+                        />
+                        <span class="alert-danger" style="color:red">{{ errors[0] }}</span>
+                      </validation-provider>
              </div>
           </div>
           <div class="row">
@@ -74,10 +90,18 @@
                 <label>Nationality</label>
               </div>
               <div class="col-7">
-              <select class="custom-select" required>
-                <option selected disabled value="">Choose...</option>
-                <option>123</option>
-              </select>
+              <ValidationProvider rules="required" v-slot="{ errors }">
+                        <select
+                          name="nationality"
+                          v-model="nationality"
+                          class="browser-default custom-select"
+                        >
+                          <option selected disabled>Nationality</option>
+                          <option value="palestinian">palestinian</option>
+                          <option value="usa">USA</option>
+                        </select>
+                        <span class="alert-danger" style="color:red">{{ errors[0] }}</span>
+                      </ValidationProvider>
              </div>
           </div>
           <div class="row">
@@ -85,7 +109,16 @@
                 <label>Tax Number</label>
               </div>
               <div class="col-7">
-              <input type="text" class="form-control" required>
+               <validation-provider rules="required" v-slot="{ errors }">
+                        <input
+                          class="form-control"
+                          v-model="taxNumber"
+                          name="taxNumber"
+                          type="text"
+                          placeholder="Enter the tax number"
+                        />
+                        <span class="alert-danger" style="color:red">{{ errors[0] }}</span>
+                      </validation-provider>
              </div>
           </div>
           <div class="row">
@@ -93,7 +126,16 @@
                 <label>Salesperson</label>
               </div>
               <div class="col-7">
-              <input type="text" class="form-control" required>
+              <validation-provider rules="required" v-slot="{ errors }">
+                        <input
+                          class="form-control"
+                          v-model="salesPerson"
+                          name="salesPerson"
+                          type="text"
+                          placeholder="Enter the sales person name "
+                        />
+                        <span class="alert-danger" style="color:red">{{ errors[0] }}</span>
+                      </validation-provider>
              </div>
           </div>
            <div class="row">
@@ -101,10 +143,18 @@
                 <label>Virtual currencies</label>
               </div>
               <div class="col-7">
-              <select class="custom-select" required>
-                <option selected disabled value="">Choose...</option>
-                <option>123</option>
-              </select>
+              <ValidationProvider rules="required" v-slot="{ errors }">
+                        <select
+                          name="virtualCurrency"
+                          v-model="virtualCurrency"
+                          class="browser-default custom-select"
+                        >
+                          <option selected disabled>virtualCurrency</option>
+                          <option value="Dollar">Dollar</option>
+                          <option value="shikel">shikel</option>
+                        </select>
+                        <span class="alert-danger" style="color:red">{{ errors[0] }}</span>
+                      </ValidationProvider>
              </div>
           </div>
            <div class="row">
@@ -112,10 +162,18 @@
                 <label>Sex</label>
               </div>
               <div class="col-7">
-              <select class="custom-select" required>
-                <option selected disabled value="">Choose...</option>
-                <option>123</option>
-              </select>
+               <ValidationProvider rules="required" v-slot="{ errors }">
+                        <select
+                          name="sex"
+                          v-model="gender"
+                          class="browser-default custom-select"
+                        >
+                          <option selected disabled>Sex</option>
+                          <option value="male">male</option>
+                          <option value="female">female</option>
+                        </select>
+                        <span class="alert-danger" style="color:red">{{ errors[0] }}</span>
+                      </ValidationProvider>
              </div>
           </div>
            <div class="row">
@@ -146,7 +204,40 @@
 
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  data(){
+    return{
+       newRow: [
+        {
+          username:"",
+          Lang: "",
+        }
+      ],
+      Lang: "",
+      username: "",
+      groupType: "",
+      code: "",
+      nationality: "",
+      taxNumber: null,
+      salesPerson: "",
+      virtualCurrency: "",
+      gender: "",
+      myStartDate: null
+    }
+    },
+    methods: {
+    addNewRow() {
+      this.newRow.push({
+        selectLang: "",
+        nameField: ""
+      });
+    },
+    deleteRow(i) {
+      if (i > 0) {
+        this.newRow.splice(i, 1);
+      }
+    },
+  }
 }
 </script>
 <style >
