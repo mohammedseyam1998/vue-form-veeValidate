@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { extend } from 'vee-validate';
 import { required } from 'vee-validate/dist/rules';
 import { ValidationProvider , ValidationObserver } from 'vee-validate';
+import VCalendar from 'v-calendar';
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
  
@@ -14,7 +15,7 @@ extend('required', {
   ...required,
   message: 'This field is required'
 });
-
+Vue.use(VCalendar)
 Vue.config.productionTip = false
 
 new Vue({

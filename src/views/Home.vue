@@ -29,13 +29,13 @@
               </div>
               <div class="col-4">
                <validation-provider rules="required" v-slot="{ errors }">
-                  <input v-model="username" class="form-control" name="myinput" type="text" />
+                  <input v-model="newRow.username" class="form-control" name="myinput" type="text" />
                   <span class="alert-danger" style="color:red">{{ errors[0] }}</span>
                </validation-provider>
               </div>
               <div class="col-2">
                <ValidationProvider rules="required" v-slot="{ errors }">
-                        <select name="language" v-model="Lang" class="browser-default custom-select">
+                        <select name="language" v-model="newRow.Lang" class="browser-default custom-select">
                           <option selected disabled>English</option>
                           <option value="en">Arabic</option>
                           <option value="ar">spanish</option>
@@ -181,7 +181,7 @@
                 <label>Start Date</label>
               </div>
               <div class="col-7">
-              <input type="text" class="form-control" required>
+               <v-date-picker v-model="startDate"></v-date-picker>
              </div>
           </div>
           <div class="row">
@@ -213,8 +213,6 @@ export default {
           Lang: "",
         }
       ],
-      Lang: "",
-      username: "",
       groupType: "",
       code: "",
       nationality: "",
@@ -222,7 +220,7 @@ export default {
       salesPerson: "",
       virtualCurrency: "",
       gender: "",
-      myStartDate: null
+      startDate: null
     }
     },
     methods: {
