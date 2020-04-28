@@ -186,8 +186,8 @@
           </div>
           <div class="row">
             <div class="col-md-3 mt-3">
-              <button type="button" class="btn btn-light mr-3 px-4">Reset </button>
-              <button type="button" class="btn btn-primary px-4 ">Send</button>
+              <button type="reset" class="btn btn-light mr-3 px-4" @click="restMsg()">Reset </button>
+              <button type="submit" class="btn btn-primary px-4 ">Send</button>
              </div>
           </div>
            </form>
@@ -235,8 +235,36 @@ export default {
         this.newRow.splice(i, 1);
       }
     },
-  }
-}
+     restMsg() {
+       this.$toasted.show("Reset successfully", { 
+          theme: "toasted-primary", 
+          position: "top-center", 
+          duration : 2000
+        });
+     },
+     onSubmit() {
+          
+         this.$refs.form.validate().then(done => {
+          if (!done) {
+            return;
+          }
+          this.$toastr.Add({
+            name: "UniqueToastName", // this is give you ability to use removeByName method
+            title: "confirmation message", // Toast Title
+            msg: "operation accomplished successfully", // Toast Message
+            clickClose: true, // Click Close Disable
+            timeout: 5000, // Remember defaultTimeout is 5 sec.(5000) in this case the toast won't close a
+            position: "toast-top-full-width", // Toast Position.utomatically
+            type: "error", // Toast type,
+            preventDuplicates: true, //Default is false,
+            style: { backgroundColor: "green", width: "300px", marginTop:"150px"}
+          });
+      })
+     }
+   
+     }
+     }
+
 </script>
 <style >
 .home{

@@ -15,7 +15,9 @@
     "v-calendar": "^1.0.6",
     "vee-validate": "^3.3.0",
     "vue": "^2.6.11",
-    "vue-router": "^3.1.6"
+    "vue-router": "^3.1.6",
+    "vue-toasted": "^1.1.28",
+    "vue-toastr": "^2.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
